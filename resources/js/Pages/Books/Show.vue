@@ -4,6 +4,7 @@ import TextInput from '@/Components/TextInput.vue';
 import TextareaInput from '@/Components/TextareaInput.vue';
 import BookLayout from '@/Layouts/BookLayout.vue';
 import { usePage } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 
 // Get the book data from the page props
 const { book } = usePage().props;
@@ -11,6 +12,8 @@ const { book } = usePage().props;
 
 <template>
     <BookLayout>
+        <Head title="Show book" />
+
         <h1 class="mb-4 text-2xl font-bold">Book Details</h1>
 
         <!-- Book Details -->

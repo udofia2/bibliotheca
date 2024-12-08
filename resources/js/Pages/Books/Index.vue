@@ -4,6 +4,8 @@ import InputLabel from '@/Components/InputLabel.vue';
 import Pagination from '@/Components/Pagination.vue';
 import TextInput from '@/Components/TextInput.vue';
 import BookLayout from '@/Layouts/BookLayout.vue';
+import { Head } from '@inertiajs/vue3';
+
 import { ref } from 'vue';
 
 const props = defineProps({ books: Array });
@@ -27,6 +29,8 @@ const clearFilters = () => {
 
 <template>
     <BookLayout>
+        <Head title="Books" />
+
         <h1 class="mb-4 text-3xl font-bold text-white">Book Collection</h1>
 
         <!-- Filters Section -->
@@ -109,11 +113,13 @@ const clearFilters = () => {
                     Year: {{ book.published_year }}
                 </p>
                 <p class="text-sm text-gray-500">Status: {{ book.status }}</p>
-                <button
-                    class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 mt-1"
-                >
-                    <a :href="`/books/${book.id}`">View Details</a>
-                </button>
+                <a :href="`/books/${book.id}`">
+                    <button
+                        class="mt-1 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+                    >
+                        View Details
+                    </button>
+                </a>
                 >
             </li>
         </ul>
