@@ -7,60 +7,142 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Book Collection
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This is a Laravel & Inertia.js-based Book Collection application. It allows users to manage a collection of books, including functionalities to filter, view, create, edit, and delete books. The frontend is built using Vue.js and styled with Tailwind CSS.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Features
 
-## Learning Laravel
+- **CRUD Operations**: Create, Read, Update, and Soft Delete books.
+- **Filter Books**: Filter by status (available, borrowed, reserved) and published year.
+- **Pagination**: Paginated list of books with dynamic per-page item selection.
+- **Responsive Design**: Clean, mobile-first UI built with Tailwind CSS.
+  
+## Requirements
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Before you begin, ensure you have the following installed:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- PHP (>= 8.1)
+- Composer
+- Node.js & NPM
+- Laravel (>= 9.x)
+- MySQL or any other database supported by Laravel
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Setup Instructions
 
-## Laravel Sponsors
+Follow the steps below to get your environment up and running.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 1. Clone the Repository
 
-### Premium Partners
+```bash
+git clone https://github.com/udofia2/bibliotheca.git
+cd bibliotheca
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 2. Install Backend Dependencies
 
-## Contributing
+Install PHP dependencies using Composer:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+composer install
+```
 
-## Code of Conduct
+### 3. Set up Environment Variables
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Copy the `.env.example` file to `.env`:
 
-## Security Vulnerabilities
+```bash
+cp .env.example .env
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Edit the `.env` file to configure your database and other environment settings:
 
-## License
+```plaintext
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=bibliotheca
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 4. Generate Application Key
+
+Run the following command to generate the application key:
+
+```bash
+php artisan key:generate
+```
+
+### 5. Run Migrations
+
+Run the migrations to create the necessary database tables:
+
+```bash
+php artisan migrate
+```
+
+### 6. (Optional) Seed the Database
+
+If you'd like to populate the database with sample data, you can run:
+
+```bash
+php artisan db:seed
+```
+
+### 7. Install Frontend Dependencies
+
+Install the frontend dependencies using NPM:
+
+```bash
+npm install
+```
+
+### 8. Build the Assets
+
+Build the frontend assets:
+
+```bash
+npm run dev
+```
+
+### 9. Run the Application
+
+Start the Laravel development server:
+
+```bash
+php artisan serve
+```
+
+Now, you can access the application by visiting `http://127.0.0.1:8000` in your browser.
+
+___
+## Usage
+
+### Pages
+
+1. **Books Index**: Displays a paginated list of books with filtering options (by status and year).
+2. **Book Show**: Displays the details of a single book.
+3. **Create Book**: A form to add a new book to the collection.
+4. **Edit Book**: A form to edit an existing book's details.
+
+### Filtering
+
+You can filter the books by:
+
+- **Status**: Choose from available, borrowed, or reserved.
+- **Year**: Enter a specific year to filter books by their published year.
+
+### Pagination
+
+The list of books is paginated. By difault the items per page is 3 but you can adjust with a query param ?page=1&perPage=2 (Example: http://localhost:8000/books?page=1&perPage=2)
+
+## Testing
+
+To run tests:
+
+```bash
+php artisan test
+```

@@ -12,7 +12,7 @@ class BookController extends Controller
     // Display all books with filtering
     public function index(Request $request)
     {
-        $perPage = $request->get('perPage', 1);
+        $perPage = $request->get('perPage', 3);
 
         $books = Book::query();
 

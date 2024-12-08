@@ -199,13 +199,13 @@ function handleImageError() {
                                         </h2>
 
                                         <p class="mt-4 text-sm/relaxed">
-                                            Laravel has wonderful documentation
-                                            covering every aspect of the
-                                            framework. Whether you are a
-                                            newcomer or have prior experience
-                                            with Laravel, we recommend reading
-                                            our documentation from beginning to
-                                            end.
+                                            Our book collection has a
+                                            comprehensive guide covering every
+                                            aspect of the library. Whether you
+                                            are a new user or have prior
+                                            experience with our catalog, we
+                                            recommend reading our README from
+                                            beginning to end.
                                         </p>
                                     </div>
                                 </div>
@@ -254,11 +254,12 @@ function handleImageError() {
                                 </h2>
 
                                 <p class="mt-4 text-sm/relaxed">
-                                    Laracasts offers thousands of video
-                                    tutorials on Laravel, PHP, and JavaScript
-                                    development. Check them out, see for
-                                    yourself, and massively level up your
-                                    development skills in the process.
+                                    Our book collection offers thousands of
+                                    titles on various subjects, including
+                                    fiction, non-fiction, and educational
+                                    resources. Explore our shelves, discover new
+                                    authors, and massively expand your reading
+                                    list in the process.
                                 </p>
                             </div>
 
@@ -305,11 +306,12 @@ function handleImageError() {
                                 </h2>
 
                                 <p class="mt-4 text-sm/relaxed">
-                                    Laravel News is a community driven portal
-                                    and newsletter aggregating all of the latest
-                                    and most important news in the Laravel
-                                    ecosystem, including new package releases
-                                    and tutorials.
+                                    Our library invites you to contribute to our
+                                    collection by adding a new book title,
+                                    including fiction, non-fiction, and
+                                    educational resources. Share your favorite
+                                    authors, new releases, and literary
+                                    discoveries with our community.
                                 </p>
                             </div>
 
@@ -356,11 +358,11 @@ function handleImageError() {
                                 </h2>
 
                                 <p class="mt-4 text-sm/relaxed">
-                                    Laravel News is a community driven portal
-                                    and newsletter aggregating all of the latest
-                                    and most important news in the Laravel
-                                    ecosystem, including new package releases
-                                    and tutorials.
+                                    Our book management system is designed to
+                                    simplify your library experience. Watch our
+                                    demo to discover how to easily browse,
+                                    search, and manage your book collection,
+                                    including features and tutorials.
                                 </p>
                             </div>
 
@@ -384,7 +386,7 @@ function handleImageError() {
                 <footer
                     class="py-16 text-center text-sm text-black dark:text-white/70"
                 >
-                    Figarts buit with Laravel v{{ laravelVersion }} (PHP v{{
+                    Figarts built with Laravel v{{ laravelVersion }} (PHP v{{
                         phpVersion
                     }})
                 </footer>
