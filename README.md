@@ -11,6 +11,9 @@
 
 # Book Collection
 
+## Video Demo
+[![Vidoe Demo](https://img.youtube.com/vi/TfAG4LOBhA8/0.jpg)](https://www.youtube.com/watch?v=TfAG4LOBhA8)
+
 This is a Laravel & Inertia.js-based Book Collection application. It allows users to manage a collection of books, including functionalities to filter, view, create, edit, and delete books. The frontend is built using Vue.js and styled with Tailwind CSS.
 
 ## Features
@@ -84,7 +87,7 @@ Run the migrations to create the necessary database tables:
 php artisan migrate
 ```
 
-### 6. (Optional) Seed the Database
+### 6. Seed the Database
 
 If you'd like to populate the database with sample data, you can run:
 
