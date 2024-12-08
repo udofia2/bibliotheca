@@ -4,13 +4,14 @@ import InputLabel from '@/Components/InputLabel.vue';
 import Pagination from '@/Components/Pagination.vue';
 import TextInput from '@/Components/TextInput.vue';
 import BookLayout from '@/Layouts/BookLayout.vue';
-import { Head } from '@inertiajs/vue3';
 
-import { ref } from 'vue';
+import { Head, Link } from '@inertiajs/vue3';
+
+import { computed, ref } from 'vue';
 
 const props = defineProps({ books: Array });
 
-// Filters for book listing
+
 const filters = ref({
     status: '',
     year: '',
@@ -18,9 +19,19 @@ const filters = ref({
 
 const loading = ref(false);
 const error = ref(false);
-console.log(props.books);
 
-// Clear the filters and refresh the books list
+const filterBooks = computed(() => {
+    return props.books.data.filter((book) => {
+        return (
+            (filters.value.status === '' ||
+                book.status === filters.value.status) &&
+            (filters.value.year === '' ||
+                book.published_year === filters.value.year)
+        );
+    });
+});
+
+
 const clearFilters = () => {
     filters.value.status = '';
     filters.value.year = '';
@@ -43,7 +54,7 @@ const clearFilters = () => {
                         id="status"
                         v-model="filters.status"
                         @change="filterBooks"
-                        class="input"
+                        class="w-full rounded-lg border border-gray-300 bg-white p-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#FF2D20]"
                     >
                         <option value="">All</option>
                         <option value="available">Available</option>
@@ -64,7 +75,7 @@ const clearFilters = () => {
                         type="number"
                         v-model="filters.year"
                         @input="filterBooks"
-                        class="input"
+                        class="w-full rounded-lg border border-gray-300 bg-white p-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#FF2D20]"
                         placeholder="Enter year"
                     />
                     <InputError class="mt-2" :message="filters.errors?.year" />
@@ -73,10 +84,10 @@ const clearFilters = () => {
 
             <!-- Add New Book Button -->
             <div>
-                <a
-                    href="books/create"
-                    class="rounded bg-blue-500 p-2 text-white"
-                    >Add New Book</a
+                <Link
+                    :href="route('books.create')"
+                    class="inline-block rounded bg-[#FF2D20] px-4 py-2 text-white hover:bg-[#FF1A18]"
+                    >Add New Book</Link
                 >
             </div>
         </div>
@@ -85,7 +96,7 @@ const clearFilters = () => {
         <div class="mb-4">
             <button
                 @click="clearFilters"
-                class="rounded bg-gray-500 p-2 text-white"
+                class="rounded bg-gray-500 px-4 py-2 text-white hover:bg-gray-600"
             >
                 Clear Filters
             </button>
@@ -98,7 +109,11 @@ const clearFilters = () => {
 
         <!-- Books List -->
         <ul v-if="!loading" class="space-y-4">
-            <li v-for="book in books.data" :key="book.id" class="border p-4">
+            <li
+                v-for="book in filterBooks"
+                :key="book.id"
+                class="rounded-lg border bg-zinc-800 p-4"
+            >
                 <h2 class="text-lg font-semibold text-white">
                     <span class="text-gray-400">Title:</span> {{ book.title }}
                 </h2>
@@ -113,20 +128,20 @@ const clearFilters = () => {
                     Year: {{ book.published_year }}
                 </p>
                 <p class="text-sm text-gray-500">Status: {{ book.status }}</p>
-                <a :href="`/books/${book.id}`">
+
+                <Link :href="`/books/${book.id}`">
                     <button
-                        class="mt-1 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+                        class="mt-1 rounded bg-[#FF2D20] px-4 py-2 text-white hover:bg-[#FF1A18]"
                     >
                         View Details
                     </button>
-                </a>
-                >
+                </Link>
             </li>
         </ul>
 
         <!-- Pagination Section -->
         <div v-if="books.links.length" class="mt-4">
-            <pagination :links="books.links" />
+            <pagination :links="books.links" :total-items="books.total" />
         </div>
 
         <!-- Error Handling -->
@@ -135,28 +150,3 @@ const clearFilters = () => {
         </div>
     </BookLayout>
 </template>
-
-<style scoped>
-.input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 0.375rem;
-    background-color: white;
-    color: #333;
-    font-size: 1rem;
-}
-
-.input:focus {
-    border-color: #4f46e5;
-    outline: none;
-}
-
-button {
-    transition: background-color 0.2s;
-}
-
-button:hover {
-    background-color: #6b7280;
-}
-</style>

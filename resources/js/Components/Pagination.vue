@@ -1,39 +1,44 @@
-<!-- /Components/Pagination.vue -->
-
 <template>
     <nav aria-label="Page navigation">
-        <ul class="flex justify-center">
+        <ul class="flex justify-center space-x-2">
+            <!-- Previous Page -->
             <li v-if="prevPageUrl">
-                <a
+                <Link
                     :href="prevPageUrl"
-                    class="px-3 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800"
+                    class="rounded-md px-3 py-2 text-white hover:bg-red-600 dark:text-gray-200 dark:hover:bg-gray-800"
                 >
                     Prev
-                </a>
+                </Link>
             </li>
-            <li v-for="page in pages" :key="page">
-                <a
+            <!-- Pagination Pages -->
+            <li v-for="page in pages" :key="page.label">
+                <Link
                     :href="page.url"
-                    class="px-3 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800"
-                    :class="{ 'bg-blue-500 text-white': page.active }"
+                    class="rounded-md px-3 py-2 text-white hover:bg-red-600 dark:text-gray-200 dark:hover:bg-gray-800"
+                    :class="{
+                        'bg-red-500 text-white': page.active,
+                        'hover:bg-red-600': !page.active,
+                    }"
                 >
                     {{ page.label }}
-                </a>
+                </Link>
             </li>
+            <!-- Next Page -->
             <li v-if="nextPageUrl">
-                <a
+                <Link
                     :href="nextPageUrl"
-                    class="px-3 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800"
+                    class="rounded-md px-3 py-2 text-white hover:bg-red-600 dark:text-gray-200 dark:hover:bg-gray-800"
                 >
                     Next
-                </a>
+                </Link>
             </li>
         </ul>
     </nav>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { Link } from '@inertiajs/vue3';
+import { computed } from 'vue';
 const props = defineProps({
     links: Array,
 });
@@ -48,9 +53,18 @@ const nextPageUrl = computed(() => {
     return nextPage?.url;
 });
 
+console.log(props)
 const pages = computed(() => {
-    return props.links.filter(
-        (link) => link.active || link.rel === 'prev' || link.rel === 'next',
-    );
+    return props.links.map((link) => {
+        // Adjust the label for 'Previous' and 'Next' to remove the quotes
+        if (link.label === '&laquo; Previous') {
+            link.label = 'Prev';
+        }
+        if (link.label === 'Next &raquo;') {
+            link.label = 'Next';
+        }
+        return link;
+    }).filter((link) => link.label && link.url);
 });
+
 </script>

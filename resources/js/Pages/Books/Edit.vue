@@ -7,25 +7,25 @@ import TextareaInput from '@/Components/TextareaInput.vue';
 import BookLayout from '@/Layouts/BookLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
-// Props from the parent (book data passed from the controller)
+
 const props = defineProps({
-    book: Object, // Book object passed to this component
+    book: Object,
 });
 
-// Define the form state using Inertia's useForm hook
+
 const form = useForm({
     title: props.book.title,
     author: props.book.author,
     description: props.book.description,
     published_year: props.book.published_year,
-    status: props.book.status, // Set the status from the existing book data
+    status: props.book.status,
 });
 
-// Submit function for updating the book
+
 const submit = () => {
     form.put(route('books.update', props.book.id), {
         onFinish: () => {
-            form.reset(); // Reset the form after submission
+            form.reset(); 
         },
     });
 };
@@ -125,7 +125,3 @@ const submit = () => {
         </form>
     </BookLayout>
 </template>
-
-<style scoped>
-/* Add custom styles if necessary */
-</style>

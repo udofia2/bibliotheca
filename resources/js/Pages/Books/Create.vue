@@ -7,37 +7,35 @@ import TextareaInput from '@/Components/TextareaInput.vue';
 import BookLayout from '@/Layouts/BookLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
-// Define the form state using Inertia's useForm hook
 const form = useForm({
     title: '',
     author: '',
     description: '',
     published_year: '',
-    status: 'available', // Default value for status
+    status: 'available',
 });
 
-// Submit function for creating a book
+
 const submit = () => {
     form.post(route('books.store'), {
         onFinish: () => {
-            form.reset(); // Reset the form after submission
+            form.reset(); 
         },
     });
 };
 </script>
-
 <template>
     <BookLayout>
         <Head title="Create Book" />
 
-        <form @submit.prevent="submit">
+        <form @submit.prevent="submit" class="space-y-4">
             <!-- Book Title -->
             <div>
                 <InputLabel for="title" value="Title" />
                 <TextInput
                     id="title"
                     type="text"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#FF2D20] focus:border-[#FF2D20]"
                     v-model="form.title"
                     required
                     autofocus
@@ -47,12 +45,12 @@ const submit = () => {
             </div>
 
             <!-- Author -->
-            <div class="mt-4">
+            <div>
                 <InputLabel for="author" value="Author" />
                 <TextInput
                     id="author"
                     type="text"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#FF2D20] focus:border-[#FF2D20]"
                     v-model="form.author"
                     required
                     autocomplete="author"
@@ -61,11 +59,11 @@ const submit = () => {
             </div>
 
             <!-- Description -->
-            <div class="mt-4">
+            <div>
                 <InputLabel for="description" value="Description" />
                 <TextareaInput
                     id="description"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#FF2D20] focus:border-[#FF2D20]"
                     v-model="form.description"
                     required
                     rows="4"
@@ -75,12 +73,12 @@ const submit = () => {
             </div>
 
             <!-- Published Year -->
-            <div class="mt-4">
+            <div>
                 <InputLabel for="published_year" value="Published Year" />
                 <TextInput
                     id="published_year"
                     type="number"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#FF2D20] focus:border-[#FF2D20]"
                     v-model="form.published_year"
                     required
                     autocomplete="published_year"
@@ -92,12 +90,12 @@ const submit = () => {
             </div>
 
             <!-- Status (Dropdown) -->
-            <div class="mt-4">
+            <div>
                 <InputLabel for="status" value="Status" />
                 <select
                     id="status"
                     v-model="form.status"
-                    class="form-select mt-1 block w-full"
+                    class="form-select mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#FF2D20] focus:border-[#FF2D20]"
                     required
                 >
                     <option value="available">Available</option>
@@ -107,10 +105,10 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.status" />
             </div>
 
-            <!-- Submit Button -->
-            <div class="mt-4 flex items-center justify-end">
+            
+            <div class="flex items-center justify-end">
                 <PrimaryButton
-                    class="ms-4"
+                    class="ms-4 px-4 py-2 bg-[#FF2D20] text-white rounded-md hover:bg-[#FF1A18] focus:outline-none focus:ring-2 focus:ring-[#FF2D20] focus:ring-offset-2 disabled:opacity-50"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >

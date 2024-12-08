@@ -32,7 +32,4 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('books', BookController::class);
 
-
-Route::inertia('/welcome', 'Auth/Register');
-Route::inertia('/book', 'Books/Create');
 require __DIR__.'/auth.php';

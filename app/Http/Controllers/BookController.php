@@ -12,6 +12,8 @@ class BookController extends Controller
     // Display all books with filtering
     public function index(Request $request)
     {
+        $perPage = $request->get('perPage', 1);
+
         $books = Book::query();
 
         if ($request->status) {
@@ -22,7 +24,7 @@ class BookController extends Controller
             $books->where('published_year', $request->year);
         }
 
-        $books = $books->paginate(10);
+        $books = $books->paginate($perPage);
 
         return Inertia::render('Books/Index', [
             'books' => $books,
